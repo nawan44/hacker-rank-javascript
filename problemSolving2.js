@@ -1,33 +1,43 @@
+'use strict';
+
+const fs = require('fs');
+
 process.stdin.resume();
-process.stdin.setEncoding('ascii');
+process.stdin.setEncoding('utf-8');
 
-var input_stdin = "";
-var input_stdin_array = "";
-var input_currentline = 0;
+let inputString = '';
+let currentLine = 0;
 
-process.stdin.on('data', function (data) {
-    input_stdin += data;
+process.stdin.on('data', function(inputStdin) {
+    inputString += inputStdin;
 });
 
-process.stdin.on('end', function () {
-    input_stdin_array = input_stdin.split("\n");
-    main();    
+process.stdin.on('end', function() {
+    inputString = inputString.split('\n');
+
+    main();
 });
 
 function readLine() {
-    return input_stdin_array[input_currentline++];
+    return inputString[currentLine++];
 }
 
-function solveMeFirst(a, b) {
-  // Hint: Type return a+b below
-     return a + b;
-}
+// Complete the compareTriplets function below.
+function compareTriplets(a, b) {
 
+
+}
 
 function main() {
-    var a = parseInt(readLine());
-    var b = parseInt(readLine());;
+    const ws = fs.createWriteStream(process.env.OUTPUT_PATH);
 
-    var res = solveMeFirst(a, b);
-    console.log(res);
+    const a = readLine().replace(/\s+$/g, '').split(' ').map(aTemp => parseInt(aTemp, 10));
+
+    const b = readLine().replace(/\s+$/g, '').split(' ').map(bTemp => parseInt(bTemp, 10));
+
+    const result = compareTriplets(a, b);
+
+    ws.write(result.join(' ') + '\n');
+
+    ws.end();
 }
